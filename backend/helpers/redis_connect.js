@@ -5,10 +5,6 @@ const client = redis.createClient({
   host: '127.0.0.1'
 })
 
-client.ping((err, pong) => {
-  console.log(pong)
-})
-
 client.on('error', (err) => {
   console.error(`Error: ${err}`)
 })

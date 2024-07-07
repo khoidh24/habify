@@ -12,7 +12,7 @@ const signAccessToken = async (userId) => {
     const secretKey = process.env.ACCESS_TOKEN
     // JWT options
     const opts = {
-      expiresIn: '24h'
+      expiresIn: '1h'
     }
     // Sign the token using the payload and secret key, and options
     JWT.sign(payload, secretKey, opts, (err, token) => {
@@ -93,7 +93,6 @@ const verifyRefreshToken = async (refreshToken) => {
         if (err) {
           return reject(createError.InternalServerError())
         }
-        //FIXME: Check if the refresh token exists in Redis and the refresh token is the same as the reply
         if (refreshToken === reply) {
           return resolve(payload)
         }
