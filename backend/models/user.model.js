@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const { userConnection } = require('../helpers/db_connect')
 const bcrypt = require('bcrypt')
-
 const schema = mongoose.Schema
 
 const UserSchema = new schema({
@@ -17,7 +16,14 @@ const UserSchema = new schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  noteList: [
+    {
+      type: schema.Types.ObjectId,
+      ref: 'notes',
+      required: true
+    }
+  ]
 })
 
 UserSchema.pre('save', async function (next) {

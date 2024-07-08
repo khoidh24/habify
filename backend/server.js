@@ -3,6 +3,7 @@ const createError = require('http-errors')
 const app = express()
 require('dotenv').config()
 const UserRoute = require('./routes/user.routes')
+const NoteRoute = require('./routes/note.routes')
 
 app.get('/', (req, res, next) => {
   res.send('Hello World')
@@ -10,13 +11,10 @@ app.get('/', (req, res, next) => {
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use('/user', UserRoute)
+app.use('/note', NoteRoute)
+app.use('/', UserRoute)
 
 app.use((req, res, next) => {
-  // const error = new Error("Not found");
-  // error.status = 404;
-  // next(error);
-
   next(createError.NotFound('This route does not exist.'))
 })
 

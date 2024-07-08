@@ -1,5 +1,4 @@
 const createError = require('http-errors')
-
 const User = require('../models/user.model')
 const { userValidate } = require('../helpers/validation')
 const {
@@ -26,7 +25,6 @@ const register = async (req, res, next) => {
     if (isExist) {
       throw createError.Conflict(`${email} is already registered`)
     }
-
     // Create a new user
     const user = new User({
       email,
@@ -35,10 +33,7 @@ const register = async (req, res, next) => {
     })
     const savedUser = await user.save()
 
-    return res.json({
-      status: 200,
-      elements: savedUser
-    })
+    return res.json({ savedUser })
   } catch (err) {
     next(err)
   }
